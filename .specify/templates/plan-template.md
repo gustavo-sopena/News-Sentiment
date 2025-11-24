@@ -31,7 +31,19 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Gates (per News API Constitution v1.0.0):
+
+- Code style enforced (formatter + linter) in CI.
+- Type checks enabled where applicable; typing inconsistencies MUST be
+  documented and justified.
+- Documentation: feature must include `quickstart.md` + concise API summary
+  for the primary user journey.
+- Tests: P1 user stories MUST include automated tests that run in CI.
+- DRY/YAGNI rationale: any proposed cross-cutting abstraction MUST include
+  justification and a migration/refactor plan.
+
+The `/speckit.plan` command SHOULD validate these gates are planned for and
+flag any violations that require explicit justification in the plan.
 
 ## Project Structure
 

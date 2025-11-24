@@ -113,3 +113,16 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+
+## Conformance *(mandatory)*
+
+All specs MUST declare how the implementation will comply with the
+News API Constitution v1.0.0. At minimum include:
+
+- How code readability will be preserved (naming, examples, docstrings).
+- The proposed style/formatter and linter configurations to be used.
+- Where tests will be added (P1 tests are required) and what they cover.
+- Any proposed abstractions that could introduce duplication or coupling
+  (DRY/YAGNI rationale and migration plan).
+
+Failure to include conformance details will delay spec approval.
