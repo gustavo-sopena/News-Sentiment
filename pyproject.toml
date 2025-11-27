@@ -1,11 +1,28 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "news-api"
 version = "0.1.0"
-description = "Add your description here"
+description = "Fetch headlines from NewsAPI, run sentiment analysis, and display results in a chart."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "matplotlib>=3.7",
-    "pytest>=7.0",
     "requests>=2.28",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=9.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -200,19 +200,32 @@ wheels = [
 [[package]]
 name = "news-api"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "matplotlib" },
-    { name = "pytest" },
     { name = "requests" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "pytest" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "matplotlib", specifier = ">=3.7" },
-    { name = "pytest", specifier = ">=7.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.0" },
     { name = "requests", specifier = ">=2.28" },
 ]
+provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = ">=9.0" }]
 
 [[package]]
 name = "numpy"
