@@ -1,0 +1,6 @@
+[
+  {"title": "Company posts record profits as sales increase", "publishedAt": "2025-11-23T10:00:00Z", "url": "https://example.com/1", "source": {"name": "Example News"}},
+  {"title": "New product launch meets mixed reviews, some users report bugs", "publishedAt": "2025-11-22T09:00:00Z", "url": "https://example.com/2", "source": {"name": "Example News"}},
+  {"title": "Elections cause uncertainty as markets fall", "publishedAt": "2025-11-21T08:00:00Z", "url": "https://example.com/3", "source": {"name": "Example News"}},
+  {"title": "Local community event brings people together", "publishedAt": "2025-11-20T07:00:00Z", "url": "https://example.com/4", "source": {"name": "Example News"}}
+]

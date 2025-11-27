@@ -7,7 +7,12 @@
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Build a small Python CLI tool that fetches headlines for a selected category
+from NewsAPI.org, runs a lexicon-based sentiment analysis on each headline,
+and outputs a bar chart PNG and an optional CSV of counts. The implementation
+will be minimal-dependency Python (3.11+), using `requests` for HTTP,
+`matplotlib` for plotting, and the standard `csv` module for CSV output. Unit
+tests will be written with `pytest` and linting with `ruff` recommended.
 
 ## Technical Context
 
@@ -17,15 +22,15 @@
   the iteration process.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: Python 3.11+  
+**Primary Dependencies**: `requests`, `matplotlib`, `pytest` (dev), `ruff` (dev), optional `langdetect` or similar for language detection  
+**Storage**: Flat CSV files for export; no DB required (N/A)  
+**Testing**: `pytest` for unit and simple integration tests  
+**Target Platform**: macOS / Linux (CLI script)  
+**Project Type**: single project (CLI tool)  
+**Performance Goals**: End-to-end for 50 headlines < 5s on a typical developer laptop  
+**Constraints**: Uses NewsAPI.org (requires API key); lexicon-based sentiment scoring; must handle API rate limits and surface clear error messages.  
+**Scale/Scope**: Small (single-user CLI tool, local runs), no multi-tenant or long-term storage requirements.
 
 ## Constitution Check
 
@@ -44,6 +49,16 @@ Gates (per News API Constitution v1.0.0):
 
 The `/speckit.plan` command SHOULD validate these gates are planned for and
 flag any violations that require explicit justification in the plan.
+
+### Constitution Re-Check (post-Phase0 research)
+
+- **Style/Lint in CI**: Planned — we will include `ruff` in `dev-requirements` and add a CI job to run formatting/lint checks before merge.
+- **Type checks**: Planned — code will include type hints for public functions and `mypy` may be added if needed; for now, `ruff`/`pyright` can be considered.
+- **Documentation**: `quickstart.md` present in the feature spec directory — PASS.
+- **Tests**: P1 user story requires unit tests and an integration test; tests are specified in the spec and will be added alongside implementation — PASS (planned).
+- **DRY/YAGNI rationale**: Design remains minimal (single script + small modules); no cross-cutting abstractions proposed that would violate YAGNI — PASS.
+
+Status: No gate violations identified that require complexity tracking. Proceed to Phase 1 design.
 
 ## Project Structure
 
@@ -103,8 +118,21 @@ ios/ or android/
 └── [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Single Python CLI project. Suggested layout:
+
+```text
+src/
+├── headlines_sentiment/
+│   ├── __main__.py   # CLI entry
+│   ├── fetcher.py    # NewsAPI client
+│   ├── sentiment.py  # Lexicon-based analyzer
+│   └── plot.py       # matplotlib charting
+tests/
+├── unit/
+└── integration/
+``` 
+
+This keeps the feature self-contained and easy to test.
 
 ## Complexity Tracking
 
